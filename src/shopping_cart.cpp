@@ -9,13 +9,15 @@ struct Product {
     double price;
     int stock;
 
+    Product() = default;
+
     Product(std::string id, std::string name, double price, int stock)
         : id(std::move(id)), name(std::move(name)), price(price), stock(stock) {}
 };
 
 struct CartItem {
     Product product;
-    int quantity;
+    int quantity = 0;
 };
 
 class ShoppingCart {
