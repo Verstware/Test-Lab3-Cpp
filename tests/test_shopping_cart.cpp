@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "shopping_cart.cpp"
+#include "../src/shopping_cart.cpp"
 
 TEST(ShoppingCartTest, AddItemSuccess) {
     Product product("prod_1", "Смартфон", 50000.0, 10);
