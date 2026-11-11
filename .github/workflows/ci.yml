@@ -1,0 +1,30 @@
+name: CI C++ Coverage
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lcov
+        run: sudo apt-get update && sudo apt-get install -y lcov
+
+      - name: Configure CMake
+        run: cmake -B build -S .
+
+      - name: Build Project
+        run: cmake --build build
+
+      - name: Run Tests
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Check Code Coverage (80% minimum)
+        run: |
+          sudo apt-get update && sudo apt-get install -y gcovr
+          gcovr --root . --object-directory=build --fail-under=80
